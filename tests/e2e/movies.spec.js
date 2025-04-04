@@ -28,5 +28,5 @@ test('Should not register movie when the required fields are empty', async ({ pa
         'Por favor, informe a sinopse.',
         'Por favor, informe a empresa distribuidora.',
         'Por favor, informe o ano de lançamento.'
-    ])
+    ]);
 })
