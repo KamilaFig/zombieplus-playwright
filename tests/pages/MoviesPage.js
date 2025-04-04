@@ -11,10 +11,17 @@ export class MoviesPage {
         await expect(this.page).toHaveURL(/.*admin/)
     }
 
-    async create(title, overwiew, company, release_year) {
-
+    async goForm(){
         await this.page.locator('a[href$="register"]').click()
-        //await this.page.locator('#title').fill(title)
+    }
+
+    async submit(){
+        await this.page.getByRole('button', {name: 'Cadastrar'}).click()
+    }
+
+    async create(title, overwiew, company, release_year) {
+        await this.goForm()
+
         await this.page.getByLabel('Titulo do filme').fill(title)
         await this.page.getByLabel('Sinopse').fill(overwiew)
 
@@ -30,6 +37,10 @@ export class MoviesPage {
             .filter({ hasText: release_year })
             .click()
 
-        await this.page.getByRole('button', {name: 'Cadastrar'}).click()
+        await this.submit()
+    }
+
+    async alertHaveText(target) {
+        await expect(this.page.locator('.alert')).toHaveText(target)
     }
 }
