@@ -3,7 +3,7 @@ import { test, expect } from '../support'
 test('Should log in as an admin', async ({ page }) => {
     await page.login.visit()
     await page.login.submitForm('admin@zombieplus.com', 'pwd123')
-    await page.login.isLoggedIn()
+    await page.login.isLoggedIn('Admin')
 });
 
 test('Should not log in as an admin with invalid password', async ({ page }) => {
