@@ -12,7 +12,7 @@ test('Should register a new movie', async ({ page }) => {
 
     await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin')
     await page.movies.create(movie)
-    await page.toast.containText('Cadastro realizado com sucesso!')
+    await page.popup.haveText(`O filme '${movie.title}' foi adicionado ao catálogo.`)
 });
 
 test('Should not register a duplicate movie title', async ({ page, request }) => {
@@ -21,7 +21,7 @@ test('Should not register a duplicate movie title', async ({ page, request }) =>
 
     await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin')
     await page.movies.create(movie)
-    await page.toast.containText('Este conteúdo já encontra-se cadastrado no catálogo')
+    await page.popup.haveText(`O título '${movie.title}' já consta em nosso catálogo. Por favor, verifique se há necessidade de atualizações ou correções para este item.`)
 });
 
 test('Should not register movie when the required fields are empty', async ({ page }) => {
@@ -30,9 +30,9 @@ test('Should not register movie when the required fields are empty', async ({ pa
     await page.movies.submit()
 
     await page.movies.alertHaveText([
-        'Por favor, informe o título.',
-        'Por favor, informe a sinopse.',
-        'Por favor, informe a empresa distribuidora.',
-        'Por favor, informe o ano de lançamento.'
+        'Campo obrigatório',
+        'Campo obrigatório',
+        'Campo obrigatório',
+        'Campo obrigatório'
     ]);
 })

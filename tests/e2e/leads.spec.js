@@ -10,8 +10,8 @@ test('Should register a lead in the waiting queue', async ({ page }) => {
     await page.leads.openLeadModal()
     await page.leads.submitLeadForm(leadName, leadEmail)
 
-    const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
-    await page.toast.containText(message)
+    const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato.'
+    await page.popup.haveText(message)
 });
 
 test('Should not register a lead with a registered email', async ({ page, request }) => {
@@ -31,8 +31,8 @@ test('Should not register a lead with a registered email', async ({ page, reques
     await page.leads.openLeadModal()
     await page.leads.submitLeadForm(leadName, leadEmail)
 
-    const message = 'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
-    await page.toast.containText(message)
+    const message = 'Verificamos que o endereço de e-mail fornecido já consta em nossa lista de espera. Isso significa que você está um passo mais perto de aproveitar nossos serviços.'
+    await page.popup.haveText(message)
 });
 
 test('Should not register a lead with an invalid email', async ({ page }) => {
