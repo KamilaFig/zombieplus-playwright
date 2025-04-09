@@ -15,6 +15,15 @@ test('Should register a new movie', async ({ page }) => {
     await page.popup.haveText(`O filme '${movie.title}' foi adicionado ao catálogo.`)
 });
 
+test('Should delete a register movie', async ({ page, request }) => {
+    const movie = data.to_remove
+    await request.api.postMovie(movie)
+
+    await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin')
+    await page.movies.remove(movie.title)
+    await page.popup.haveText('Filme removido com sucesso.')
+});
+
 test('Should not register a duplicate movie title', async ({ page, request }) => {
     const movie = data.duplicate
     await request.api.postMovie(movie)
