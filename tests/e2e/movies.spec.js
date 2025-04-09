@@ -44,4 +44,16 @@ test('Should not register movie when the required fields are empty', async ({ pa
         'Campo obrigatório',
         'Campo obrigatório'
     ]);
-})
+});
+
+test('Should search using the term zumbi', async ({ page, request }) => {
+    const movies = data.search
+
+    movies.data.forEach(async (m) => {
+        await request.api.postMovie(m)
+    })
+
+    await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin')
+    await page.movies.search(movies.input)
+    await page.movies.tableHave(movies.outputs)
+});
