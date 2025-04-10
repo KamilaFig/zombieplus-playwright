@@ -8,5 +8,5 @@ node_modules/
 notes.txt
 .vscode
 .DS_Store
-/zombieplus/.env
+.env
 
